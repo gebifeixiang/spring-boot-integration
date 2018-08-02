@@ -101,12 +101,17 @@
 			<optional>true</optional>
 		</dependency>
 		<!-- 热部署 end -->
-		<!-- zookerer begin -->
-		<!-- <dependency>
-      <groupId>org.apache.zookeeper</groupId>
-      <artifactId>zookeeper</artifactId>
-      <version>3.3.6</version>
-    </dependency> -->
-    <!-- zookeper end -->
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<fork>true</fork><!-- 如果没有该项配置，devtools不会起作用，即应用不会restart -->
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

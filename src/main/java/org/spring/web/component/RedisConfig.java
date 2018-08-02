@@ -1,5 +1,7 @@
 package org.spring.web.component;
 import java.util.Arrays;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -15,12 +17,20 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import redis.clients.jedis.Jedis;
+
 /**
  * redis配置类
  */
 @Configuration
 @EnableCaching
 public class RedisConfig extends CachingConfigurerSupport{
+	
+	@Value("${spring.redis.host}")
+	private String redisHost;
+	@Value("${spring.redis.port}")
+	private int redisPort;
+	
 
     @SuppressWarnings("rawtypes")
     @Bean
@@ -44,6 +54,14 @@ public class RedisConfig extends CachingConfigurerSupport{
         template.setValueSerializer(jackson2JsonRedisSerializer);
         template.afterPropertiesSet();
         return template;
+    }
+    
+    @Bean
+    public Jedis jedis(){  	
+    	//return new Jedis(redisHost,redisPort);
+    	System.out.println("redisHost>>>>>>>"+redisHost);
+    	System.out.println("redisPort>>>>>>>"+redisPort);
+    	return new Jedis();
     }
 
 }
