@@ -20,11 +20,12 @@ import org.springframework.stereotype.Component;
 //@Mapper
 //@Component
 
+
 public interface UserMapper {
 	/*
 	 * 用户新增
 	 */
-   public int inserUser(User user);
+   public int insertUser(User user);
    
    public User selectUserById(Integer id);
    

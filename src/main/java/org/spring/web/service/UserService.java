@@ -1,7 +1,6 @@
 package org.spring.web.service;
 
 import org.spring.web.entity.User;
-import org.springframework.stereotype.Service;
 
 /**
 *

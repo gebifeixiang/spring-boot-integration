@@ -7,6 +7,7 @@ import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -24,6 +25,7 @@ import redis.clients.jedis.Jedis;
  */
 @Configuration
 @EnableCaching
+@PropertySource(value = "classpath:application.properties", encoding = "UTF-8")
 public class RedisConfig extends CachingConfigurerSupport{
 	
 	@Value("${spring.redis.host}")
@@ -57,6 +59,7 @@ public class RedisConfig extends CachingConfigurerSupport{
     }
     
     @Bean
+    //客户端连接信息是怎么获取的？不设置，或者设置错误的值也可以连接到redis
     public Jedis jedis(){  	
     	//return new Jedis(redisHost,redisPort);
     	System.out.println("redisHost>>>>>>>"+redisHost);

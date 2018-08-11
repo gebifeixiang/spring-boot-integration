@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.spring.web.mapper.UserRoleMapper" >
+
+    <resultMap id="BaseResultMap" type="org.spring.web.entity.UserRole" >
+        <id column="user_id" property="userId" jdbcType="VARCHAR" />
+        <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+        <result column="descInfo" property="desc" jdbcType="VARCHAR" />
+    </resultMap>
+    
+     <sql id="Base_Column_List" >
+        user_id, role_id,descInfo
+    </sql>
+    
+    <!-- 查询用户 -->
+   
+    <!--插入用户-->
+    <insert id="insertUserRole" parameterType="org.spring.web.entity.UserRole">
+     insert into user_role 
+     <trim prefix="(" suffix=")" suffixOverrides=",">
+     	<if test="userId!=null and userId!=''">user_id,</if>
+     	<if test="roleId!=null and roleId!=''">role_id,</if>
+        <if test="desc!=null and desc!=''">descInfo</if>
+     </trim>
+     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId!=null and userId!=''">#{userId},</if>
+      <if test="roleId!=null and roleId!=''">#{roleId},</if>
+      <if test="desc!=null and desc!=''"> #{desc}</if>
+     </trim>
+    </insert>
+    
+    
+   
+    
+    </mapper>

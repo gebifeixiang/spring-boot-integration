@@ -19,6 +19,23 @@
      <include refid="Base_Column_List" />
       from user where id=#{id}
     </select>
+    <!--插入用户-->
+    <insert id="insertUser" parameterType="org.spring.web.entity.User">
+     insert into user 
+     <trim prefix="(" suffix=")" suffixOverrides=",">
+     	<if test="id!=null and id!=''">id,</if>
+     	<if test="age!=null and age!=''">age,</if>
+        <if test="userName!=null and userName!=''">user_name,</if>
+        <if test="password!=null and password!=''">password</if>     	
+     </trim>
+     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id!=null and id!=''">#{id},</if>
+      <if test="age!=null and age!=''">#{age},</if>
+      <if test="userName!=null and userName!=''"> #{userName},</if>
+      <if test="password!=null and password!=''"> #{password}</if>     	
+     </trim>
+     
+    </insert>
      <update id="updateUser" parameterType="org.spring.web.entity.User" >
        UPDATE 
        		user

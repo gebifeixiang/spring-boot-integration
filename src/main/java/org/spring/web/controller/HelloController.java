@@ -6,6 +6,8 @@ import org.spring.web.entity.User;
 import org.spring.web.service.MqSendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +25,9 @@ import org.springframework.web.bind.annotation.RestController;
 *
 */
 @RestController
-@RequestMapping("/hello")
+@RequestMapping(value="/hello",produces="text/plain;charset=UTF-8")
+@ConfigurationProperties(prefix = "application")
+@PropertySource(value = "classpath:application.properties", encoding = "UTF-8")
 public class HelloController {
 	@Value("${com.interview.question}")
 	private String interviewQuestion;
@@ -36,6 +40,7 @@ public class HelloController {
 	
 	@RequestMapping("/hello")
 	public String hello(){
+		System.out.println(">>>>>>>>>>>>>>>>"+interviewQuestion);
 		return interviewQuestion;
 	}
 	@RequestMapping("/sendMQ")

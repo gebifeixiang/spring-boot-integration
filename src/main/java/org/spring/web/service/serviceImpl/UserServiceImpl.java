@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
 *
@@ -36,8 +37,16 @@ public class UserServiceImpl  implements  UserService{
 	@Autowired
 	private RedisTemplate redisTemplate;
 	
+	
+	@Transactional
 	public int inserUser(User user) {
-		return 0;
+	/*	user.setUserName("nihao");
+		user.setAge(11);
+		user.setPassword("password");
+		user.setId(11);*/
+		
+		 return userMapper.insertUser(user);
+		//throw new RuntimeException("抛异常");
 	}
 
 	public User selectUserById(Integer id) {
